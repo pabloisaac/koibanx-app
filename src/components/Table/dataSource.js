@@ -40,8 +40,8 @@ export const columns = [
       id: 'actual_balance',
     },
     {
-      label: 'Activo',
-      id: 'active',
+      label: 'Estado',
+      id: 'status',
     },
     {
       label: 'Ultima venta',

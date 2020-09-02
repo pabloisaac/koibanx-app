@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useContext, useState } from 'react';
 import { AppContext } from './storage/reducers';
 import { setData } from './storage/actions';
-import { getStoresMock } from './services/http';
+import { getStores } from './services/http';
 import Search from './components/Search';
 import Table from './components/Table';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -11,25 +11,27 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      await getDataTable()
-    })();
-  }, []);
-
-
-  const getDataTable = async () => {
-    let response = await getStoresMock()
-    if(response.length !== 0){
-      dispatch(setData(response))
-    } else {
-      dispatch(setData([]))
+    const getDataTable = async () => {
+      let query = {
+        id: { $regex: ".*"} ,
+        cuit: { $regex: ".*"} ,
+        commerce: { $regex: ".*"},
+        active: { $regex: ".*"} 
+      };
+      let response = await getStores(query)
+      if(response.length !== 0){
+        dispatch(setData(response))
+      } else {
+        dispatch(setData([]))
+      }
+      setLoading(false)
     }
-    setLoading(false)
-  }
+    getDataTable();
+  }, []);
 
     return (
       <Fragment>
-        { loading && <CircularProgress /> }
+        { loading && <CircularProgress style={{marginLeft: '50%', marginTop: '25%'}} /> }
         { !loading && <Search /> }
         { !loading && <Table /> }
       </Fragment>

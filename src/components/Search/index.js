@@ -18,9 +18,9 @@ const SearchInput = () => {
   const classes = useStyles();
   const { dispatch } = useContext(AppContext);
   const [select, setSelect] = useState("all");
-  const [id, setId] = useState(undefined);
-  const [cuit, setCuit] = useState(undefined);
-  const [commerce, setCommerce] = useState(undefined);
+  const [id, setId] = useState("");
+  const [cuit, setCuit] = useState("");
+  const [commerce, setCommerce] = useState("");
 
   const onChange = e => {
     if (e.target.name === "id") setId(e.target.value);

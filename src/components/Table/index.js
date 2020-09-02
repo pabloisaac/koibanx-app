@@ -24,9 +24,8 @@ const ReactTable = () => {
 
   const handleChangeRowsPerPage = e => {
     setRowsPerPage(+e.target.value);
-    setPage(0);
-  };
 
+  };
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
@@ -67,7 +66,7 @@ const ReactTable = () => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 15, 50]}
         component="div"
         count={state.data.data_to_show.length}
         rowsPerPage={rowsPerPage}
